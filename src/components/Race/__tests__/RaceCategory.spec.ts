@@ -3,7 +3,7 @@ import { createTestingPinia } from '@pinia/testing';
 import { useRacingStore } from '../../../stores/racingStore/racingStore';
 import RaceCategory from '../RaceCategory.vue';
 import { beforeEach, describe, expect, it, vi } from 'vitest'; 
-import { categoryList } from '../utils'; // Ensure the file extension is correct
+import { categoryList } from '../utils'; 
 
 describe('RaceCategory.vue', () => {
   let store: ReturnType<typeof useRacingStore>;
