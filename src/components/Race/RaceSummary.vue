@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, computed } from 'vue';
+import { onUnmounted, ref, computed } from 'vue';
 import { useRacingStore } from '../../stores/racingStore/racingStore';
 import { calculateRemainingTime, filterRacesByCategory, numberOfRacesToShow } from '../../utils/utils';
 import { categoryList } from './utils';
@@ -9,7 +9,8 @@ const store = useRacingStore();
 const currentTime = ref(Math.floor(Date.now() / 1000));
 
 const filteredRaces = computed(() => {
-  return filterRacesByCategory(store.raceSummaries, store.selectedCategories).slice(0, numberOfRacesToShow);
+  const filtered = filterRacesByCategory(store.raceSummaries, store.selectedCategories);
+  return filtered.slice(0, numberOfRacesToShow);
 });
 
 const interval = setInterval(() => {
@@ -28,7 +29,7 @@ onUnmounted(() => {
 <template>
   <div>
     <ul class="race-grid">
-      <li v-for="(race, index) in filteredRaces" :key="race.race_id" class="race-card">
+      <li v-for="(race, index) in filteredRaces" :key="race.race_id" class="race-card" :data-category-id="race.category_id">
         <div class="header">
           <div class="row">
             <img :src="categoryIcons[race.category_id]" alt="Category Icon" class="race-icon" />

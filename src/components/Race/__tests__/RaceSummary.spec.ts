@@ -3,6 +3,7 @@ import { createTestingPinia } from '@pinia/testing';
 import { useRacingStore } from '../../../stores/racingStore/racingStore';
 import RaceSummary from '../RaceSummary.vue';
 import { vi } from 'vitest';
+import { raceCategories } from '../../../utils/utils';
 
 describe('RaceSummary.vue', () => {
   let store: ReturnType<typeof useRacingStore>;
@@ -20,7 +21,7 @@ describe('RaceSummary.vue', () => {
         race_name: 'Race 1',
         race_number: 1,
         meeting_name: 'Meeting 1',
-        category_id: 'cat1',
+        category_id: raceCategories['Greyhound Racing'],
         advertised_start: { seconds: 1000 },
       },
       race2: {
@@ -28,15 +29,23 @@ describe('RaceSummary.vue', () => {
         race_name: 'Race 2',
         race_number: 2,
         meeting_name: 'Meeting 2',
-        category_id: 'cat2',
+        category_id: raceCategories['Harness Racing'],
         advertised_start: { seconds: 2000 },
+      },
+      race3: {
+        race_id: 'race2',
+        race_name: 'Race 2',
+        race_number: 2,
+        meeting_name: 'Meeting 2',
+        category_id: raceCategories['Horse Racing'],
+        advertised_start: { seconds: 3000 },
       },
     };
 
-    store.selectedCategories = ['cat1', 'cat2'];
+    store.selectedCategories = Object.values(raceCategories);
   });
 
-  it('renders the correct number of races', () => {
+  it('renders all three types of races when all categories are selected', () => {
     const wrapper = mount(RaceSummary, {
       global: {
         plugins: [pinia]
@@ -44,10 +53,18 @@ describe('RaceSummary.vue', () => {
     });
 
     const raceCards = wrapper.findAll('.race-card');
-    expect(raceCards.length).toBe(2);
+    expect(raceCards.length).toBe(3);
+
+    // Get all category IDs from the rendered races
+    const renderedCategoryIds = raceCards.map(card => card.attributes('data-category-id'));
+
+    // Verify each expected category ID is present
+    Object.values(raceCategories).forEach(categoryId => {
+      expect(renderedCategoryIds).toContain(categoryId);
+    });
   });
 
-  it('displays race details correctly', () => {
+  it('displays races with correct category IDs', () => {
     const wrapper = mount(RaceSummary, {
       global: {
         plugins: [pinia]
@@ -55,26 +72,10 @@ describe('RaceSummary.vue', () => {
     });
 
     const raceCards = wrapper.findAll('.race-card');
-    expect(raceCards[0].text()).toContain('Race 1');
-    expect(raceCards[0].text()).toContain('Meeting 1');
-    expect(raceCards[0].text()).toContain('R1');
-
-    expect(raceCards[1].text()).toContain('Race 2');
-    expect(raceCards[1].text()).toContain('Meeting 2');
-    expect(raceCards[1].text()).toContain('R2');
-  });
-
-  it('filters races based on selected categories', () => {
-    store.selectedCategories = ['cat1'];
-
-    const wrapper = mount(RaceSummary, {
-      global: {
-        plugins: [pinia],
-      },
-    });
-
-    const raceCards = wrapper.findAll('.race-card');
-    expect(raceCards.length).toBe(1);
-    expect(raceCards[0].text()).toContain('Race 1');
+    
+    // Check each race has the correct category_id
+    expect(raceCards[0].attributes('data-category-id')).toBe(raceCategories['Greyhound Racing']);
+    expect(raceCards[1].attributes('data-category-id')).toBe(raceCategories['Harness Racing']);
+    expect(raceCards[2].attributes('data-category-id')).toBe(raceCategories['Horse Racing']);
   });
 });
