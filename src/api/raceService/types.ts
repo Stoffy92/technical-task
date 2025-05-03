@@ -35,11 +35,7 @@ export interface RaceSummary {
   meeting_name: string
   category_id: string
   advertised_start: AdvertisedStart
-  race_form: RaceForm
-  venue_id: string
-  venue_name: string
-  venue_state: string
-  venue_country: string
+ 
 }
 
 export interface RacesResponse {

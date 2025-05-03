@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
 import { useRacingStore } from '../../../stores/racingStore/racingStore';
 import RaceSummary from '../RaceSummary.vue';
-import { vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { raceCategories } from '../../../utils/utils';
 
 describe('RaceSummary.vue', () => {
@@ -20,6 +20,7 @@ describe('RaceSummary.vue', () => {
         race_id: 'race1',
         race_name: 'Race 1',
         race_number: 1,
+        meeting_id: 'meeting1',
         meeting_name: 'Meeting 1',
         category_id: raceCategories['Greyhound Racing'],
         advertised_start: { seconds: 1000 },
@@ -28,6 +29,7 @@ describe('RaceSummary.vue', () => {
         race_id: 'race2',
         race_name: 'Race 2',
         race_number: 2,
+        meeting_id: 'meeting2',
         meeting_name: 'Meeting 2',
         category_id: raceCategories['Harness Racing'],
         advertised_start: { seconds: 2000 },
@@ -36,6 +38,7 @@ describe('RaceSummary.vue', () => {
         race_id: 'race2',
         race_name: 'Race 2',
         race_number: 2,
+        meeting_id: 'meeting3',
         meeting_name: 'Meeting 2',
         category_id: raceCategories['Horse Racing'],
         advertised_start: { seconds: 3000 },
