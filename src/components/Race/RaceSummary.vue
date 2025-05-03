@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onUnmounted, ref, computed } from 'vue';
+import { computed } from 'vue';
 import { useRacingStore } from '../../stores/racingStore/racingStore';
 import { filterRacesByCategory, numberOfRacesToShow } from '../../utils/utils';
 import { categoryList } from './utils';

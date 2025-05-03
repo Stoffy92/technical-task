@@ -14,22 +14,19 @@ export const filterRacesByCategory = (
   raceSummaries: Record<string, any>,
   categoryIds: string[]
 ) => {
-  console.log('Filtering races with category IDs:', categoryIds);
+
   const races = Object.values(raceSummaries);
-  console.log('Total races to filter:', races.length);
   
   const filteredRaces = races.filter((race) => {
     const isIncluded = categoryIds.includes(race.category_id);
-    console.log(`Race ${race.race_id} (category: ${race.category_id}) - Included: ${isIncluded}`);
     return isIncluded;
   });
   
-  console.log('Filtered races count:', filteredRaces.length);
   return filteredRaces;
 };
 
-export const API_BASE_URL = 'https://api.neds.com.au/rest/v1/racing/?method=nextraces&count=25';
-export const numberOfRacesToShow = 25;
+export const API_BASE_URL = 'https://api.neds.com.au/rest/v1/racing/?method=nextraces&count=10';
+export const numberOfRacesToShow = 5;
 export const raceCategories = {
     "Greyhound Racing": '9daef0d7-bf3c-4f50-921d-8e818c60fe61',
     "Harness Racing": '161d9be2-e909-4326-8c2c-35ed71fb460b',

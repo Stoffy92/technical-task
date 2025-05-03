@@ -6,7 +6,6 @@ import { onMounted } from 'vue';
 const store = useRacingStore();
 
 onMounted(() => {
-  console.log('App mounted, fetching next');
   store.fetchNextToGoRaces();
 });
 
