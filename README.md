@@ -27,3 +27,9 @@ This project has been structured in a component based approach, this promotes
 I was trying to destructure my store, which ended up killing the reactivity
 
 const { nextToGoRaces, loading, error, fetchNextToGoRaces } = useRacingStore(); // this does not work :(
+
+# Last minute improvements - Had some extra time on hands, wanted to improve the task further
+* improved type safety and autocomplete when racingStore gets used inside components
+* seperated timer logic to seperate component
+* added styling to timer component for better UX
+* added unit test to timer
