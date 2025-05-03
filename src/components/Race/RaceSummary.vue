@@ -19,7 +19,7 @@ const categoryIcons = Object.fromEntries(categoryList.map((category) => [categor
 <template>
   <div>
     <ul class="race-grid">
-      <li v-for="(race, index) in filteredRaces" :key="race.race_id" class="race-card" :data-race="race as RaceSummary">        
+      <li v-for="(race, index) in filteredRaces" :key="race.race_id" class="race-card" :data-race="race as RaceSummary" :data-category-id="race.category_id">        
         <div class="header">
           <div class="row">
             <img :src="categoryIcons[race.category_id]" alt="Category Icon" class="race-icon" />
