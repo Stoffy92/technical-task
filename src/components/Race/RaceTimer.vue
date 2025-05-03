@@ -24,7 +24,7 @@ onUnmounted(() => {
 
 <template>
   <p v-if="remainingTime" class="timer">{{ remainingTime }}</p>
-  <div v-else class="race-started">Race started</div>
+  <p v-else class="race-started">Race started</p>
 </template>
 
 <style scoped>

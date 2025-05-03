@@ -12,7 +12,6 @@ function toggleCategory(categoryId: string) {
   store.setSelectedCategories(updatedCategories); 
 }
 
-
 </script>
 
 

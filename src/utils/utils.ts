@@ -1,3 +1,5 @@
+import type { RaceSummary } from '../api/raceService/types';
+
 export const calculateRemainingTime = (seconds: number, currentTime: number): string => {
   const remaining = seconds - currentTime;
 
@@ -11,10 +13,9 @@ export const calculateRemainingTime = (seconds: number, currentTime: number): st
 };
 
 export const filterRacesByCategory = (
-  raceSummaries: Record<string, any>,
+  raceSummaries: Record<string, RaceSummary>,
   categoryIds: string[]
-) => {
-
+): RaceSummary[] => {
   const races = Object.values(raceSummaries);
   
   const filteredRaces = races.filter((race) => {
