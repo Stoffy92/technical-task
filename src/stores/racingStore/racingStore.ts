@@ -12,6 +12,7 @@ export const useRacingStore = defineStore('racing', () => {
   const selectedCategories = ref<string[]>(Object.values(raceCategories)); 
 
   const setSelectedCategories = (categories: string[]) => {
+    console.log('Setting selected categories:', categories);
     selectedCategories.value = categories;
   };
 

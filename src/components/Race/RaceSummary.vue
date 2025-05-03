@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { onUnmounted, ref, computed } from 'vue';
 import { useRacingStore } from '../../stores/racingStore/racingStore';
 import { filterRacesByCategory, numberOfRacesToShow } from '../../utils/utils';
 import { categoryList } from './utils';
@@ -8,8 +8,9 @@ import RaceTimer from './RaceTimer.vue';
 
 const store = useRacingStore();
 
-const filteredRaces = computed<RaceSummary[]>(() => {
-  return filterRacesByCategory(store.raceSummaries, store.selectedCategories).slice(0, numberOfRacesToShow);
+const filteredRaces = computed(() => {
+  const filtered = filterRacesByCategory(store.raceSummaries, store.selectedCategories);
+  return filtered.slice(0, numberOfRacesToShow);
 });
 
 const categoryIcons = Object.fromEntries(categoryList.map((category) => [category.categoryId, category.icon]));
@@ -18,13 +19,14 @@ const categoryIcons = Object.fromEntries(categoryList.map((category) => [categor
 <template>
   <div>
     <ul class="race-grid">
-      <li v-for="(race, index) in filteredRaces" :key="race.race_id" class="race-card" :data-race="race as RaceSummary">
+      <li v-for="(race, index) in filteredRaces" :key="race.race_id" class="race-card" :data-race="race as RaceSummary">        
         <div class="header">
           <div class="row">
             <img :src="categoryIcons[race.category_id]" alt="Category Icon" class="race-icon" />
             <RaceTimer :start-time="race.advertised_start.seconds" />
           </div>
           <div class="row">
+            {{ race.race }}
             <p class="uppercase"> {{ race.race_name }}</p>
             <p>R{{ race.race_number }}</p>
           </div>
