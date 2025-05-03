@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { raceCategories } from '../../utils/utils';
 import { useRacingStore } from '../../stores/racingStore/racingStore';
 import { categoryList } from './utils';
 
 const store = useRacingStore();
-const selectedCategories = ref<RaceCategoryId[]>([]);
 
 function toggleCategory(categoryId: string) {
   const updatedCategories = store.selectedCategories.includes(categoryId)
