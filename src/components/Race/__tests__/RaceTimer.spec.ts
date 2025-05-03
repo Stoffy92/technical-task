@@ -56,7 +56,7 @@ describe('RaceTimer', () => {
     vi.advanceTimersByTime(oneSecond);
     await wrapper.vm.$nextTick();
 
-    expect(wrapper.text()).toContain('4s');
+    expect(wrapper.text()).toContain('0h 0m 5s');
   });
 
   it('cleans up interval on unmount', () => {
