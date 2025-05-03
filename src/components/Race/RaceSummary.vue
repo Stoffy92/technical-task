@@ -26,7 +26,6 @@ const categoryIcons = Object.fromEntries(categoryList.map((category) => [categor
             <RaceTimer :start-time="race.advertised_start.seconds" />
           </div>
           <div class="row">
-            {{ race.race }}
             <p class="uppercase"> {{ race.race_name }}</p>
             <p>R{{ race.race_number }}</p>
           </div>
