@@ -40,6 +40,10 @@ const categoryIcons = Object.fromEntries(categoryList.map((category) => [categor
 <style scoped>
 
 .header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 7rem;
   border-bottom: 3px solid #ddd;
 }
 
