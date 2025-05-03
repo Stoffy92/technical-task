@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
 import { useRacingStore } from '../../../stores/racingStore/racingStore';
 import RaceCategory from '../RaceCategory.vue';
-import { vi } from 'vitest'; 
+import { beforeEach, describe, expect, it, vi } from 'vitest'; 
 import { categoryList } from '../utils'; // Ensure the file extension is correct
 
 describe('RaceCategory.vue', () => {
@@ -27,10 +27,10 @@ describe('RaceCategory.vue', () => {
 
     const checkboxes = wrapper.findAll('input[type="checkbox"]');
     expect(checkboxes.length).toBe(categoryList.length);
-
     categoryList.forEach((category, index) => {
-      expect(checkboxes[index].element.value).toBe(category.categoryId);
-      expect(checkboxes[index].element.checked).toBe(true);
+      const checkbox = checkboxes[index].element as HTMLInputElement;
+      expect(checkbox.value).toBe(category.categoryId);
+      expect(checkbox.checked).toBe(true);
     });
   });
 

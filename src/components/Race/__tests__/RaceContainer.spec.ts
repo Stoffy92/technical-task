@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
 import { useRacingStore } from '../../../stores/racingStore/racingStore';
 import RaceContainer from '../RaceContainer.vue';
-import { vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 describe('RaceContainer.vue', () => {
   let store: ReturnType<typeof useRacingStore>;
