@@ -33,3 +33,5 @@ const { nextToGoRaces, loading, error, fetchNextToGoRaces } = useRacingStore(); 
 * seperated timer logic to seperate component
 * added styling to timer component for better UX
 * added unit test to timer
+* fix unit test imports
+* fix linting errors
