@@ -1,29 +1,18 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, computed } from 'vue';
+import { computed } from 'vue';
 import { useRacingStore } from '../../stores/racingStore/racingStore';
-import { calculateRemainingTime, filterRacesByCategory, numberOfRacesToShow } from '../../utils/utils';
+import { filterRacesByCategory, numberOfRacesToShow } from '../../utils/utils';
 import { categoryList } from './utils';
 import type { RaceSummary } from '../../api/raceService/types';
+import RaceTimer from './RaceTimer.vue';
 
 const store = useRacingStore();
-
-const currentTime = ref(Math.floor(Date.now() / 1000));
 
 const filteredRaces = computed<RaceSummary[]>(() => {
   return filterRacesByCategory(store.raceSummaries, store.selectedCategories).slice(0, numberOfRacesToShow);
 });
 
-const interval = setInterval(() => {
-    currentTime.value = Math.floor(Date.now() / 1000);
-}, 1000);
-
 const categoryIcons = Object.fromEntries(categoryList.map((category) => [category.categoryId, category.icon]));
-
-
-onUnmounted(() => {
-    clearInterval(interval);
-});
-
 </script>
 
 <template>
@@ -33,7 +22,7 @@ onUnmounted(() => {
         <div class="header">
           <div class="row">
             <img :src="categoryIcons[race.category_id]" alt="Category Icon" class="race-icon" />
-            <p>{{ calculateRemainingTime(race.advertised_start.seconds, currentTime) }}</p>
+            <RaceTimer :start-time="race.advertised_start.seconds" />
           </div>
           <div class="row">
             <p class="uppercase"> {{ race.race_name }}</p>
