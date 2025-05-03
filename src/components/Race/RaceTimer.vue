@@ -23,6 +23,21 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <p v-if="remainingTime">{{ remainingTime }}</p>
-  <p v-else>Race started</p>
-</template> 
+  <p v-if="remainingTime" class="timer">{{ remainingTime }}</p>
+  <div v-else class="race-started">Race started</div>
+</template>
+
+<style scoped>
+.timer {
+  color: #3c4a57;
+  font-weight: bold;
+}
+
+.race-started {
+  background-color: #4CAF50;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+</style> 
