@@ -54,7 +54,7 @@ const categoryIcons = Object.fromEntries(categoryList.map((category) => [categor
   text-transform: uppercase;
   font-weight: bold;
   color: #3c4a57;
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 .row {
